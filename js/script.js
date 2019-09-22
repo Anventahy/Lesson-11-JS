@@ -4,8 +4,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let tab = document.querySelectorAll('.info-header-tab'), // получаем дочерний классы
         info = document.querySelector('.info-header'), // получаем родителя
-        tabContent = document.querySelectorAll('.info-tabcontent'), // карточки
-        descBtn = document.querySelectorAll('.description-btn');
+        tabContent = document.querySelectorAll('.info-tabcontent'); // карточки
+        
 
     function hideTabContent(a) {
         for (let i = a; i < tabContent.length; i++) {
@@ -30,11 +30,11 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (target == tab[i]) {
                     hideTabContent(0);
                     showTabContent(i);
-                    descBtn[i].addEventListener('click', function () {
-                        overlay.style.display = 'block';
-                        this.classList.add('more-splash');
-                        document.body.style.overflow = 'hidden';
-                    });
+                    // descBtn[i].addEventListener('click', function () {
+                    //     overlay.style.display = 'block';
+                    //     this.classList.add('more-splash');
+                    //     document.body.style.overflow = 'hidden';
+                    // });
                     break;
                 }
             }
@@ -100,13 +100,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let more = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
-        close = document.querySelector('.popup-close');
+        close = document.querySelector('.popup-close'),
+        descBtn = document.querySelectorAll('.description-btn');
 
-    more.addEventListener('click', function () {
+    function showModal() {
         overlay.style.display = 'block';
         this.classList.add('more-splash');
         document.body.style.overflow = 'hidden';
-    });
+    }
+
+    more.addEventListener('click', showModal);
 
     close.addEventListener('click', function () {
         overlay.style.display = 'none';
@@ -114,4 +117,8 @@ window.addEventListener('DOMContentLoaded', function () {
         document.body.style.overflow = '';
 
     });
+    
+    for (let i = 0; i < descBtn.length; i++) {
+        descBtn[i].addEventListener('click', showModal);
+    }
 });
